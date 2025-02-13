@@ -51,8 +51,6 @@ class Parser {
             return forStatement();
         if (match(IF))
             return ifStatement();
-        if (match(PRINT))
-            return printStatement();
         if (match(RETURN))
             return returnStatement();
         if (match(WHILE))
@@ -119,12 +117,6 @@ class Parser {
         }
 
         return new Stmt.If(condition, thenBranch, elseBranch);
-    }
-
-    private Stmt printStatement() {
-        Expr value = expression();
-        consume(SEMICOLON, "Expect ';' after value.");
-        return new Stmt.Print(value);
     }
 
     private Stmt returnStatement() {
@@ -417,7 +409,6 @@ class Parser {
                 case FOR:
                 case IF:
                 case WHILE:
-                case PRINT:
                 case RETURN:
                     return;
             }
