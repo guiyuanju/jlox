@@ -1,3 +1,4 @@
+// expression, statement, arithmetic, variable, function, return
 fun fib(n) {
   if (n <= 1) return n;
   return fib(n - 1) + fib(n - 2);
@@ -5,4 +6,40 @@ fun fib(n) {
 
 for (var i = 0; i < 20; i = i+ 1) {
   print(fib(i));
+}
+
+// nested function, closure
+fun makeCounter() {
+  var i = 0;
+  fun count() {
+    print(i);
+  }
+  i = 1;
+  return count;
+}
+var counter = makeCounter();
+counter();
+
+// variable resolve pass
+{
+  var a = 1;
+  {
+    fun inner() {
+      print(a);
+    }
+    inner();
+    var a = 2;
+    inner();
+  }
+}
+
+// expect error, for `var a = a;`, declaration comes first,
+// thus `a` mentioned inside initializer point to itself
+// in Go, the initializer run first, so the a insize initializer
+// actually refers to the outer a
+// while in C, the declaration run first, so `a` initialized
+// with some random value which stored in `a` before initialization
+var a = "outer";
+{
+  // var a = a;
 }
