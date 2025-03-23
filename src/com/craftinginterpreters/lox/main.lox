@@ -43,3 +43,62 @@ var a = "outer";
 {
   // var a = a;
 }
+
+// class
+class Cream {
+  init(name, age) {
+    this.name = name;
+    this.age = age;
+    print("finish init");
+  }
+
+  serveOn() {
+    return "Scones";
+  }
+
+  testThis() {
+    print(this);
+  }
+}
+
+print(Cream);
+
+var cream = Cream("cream_name", 1000);
+print(cream.serveOn);
+print(cream.serveOn());
+
+var method = cream.testThis;
+method();
+
+print(cream.name);
+print(cream.age);
+
+class Superclass {
+  init() {
+    print("init superclass");
+  }
+
+  say() {
+    print("hi, i am superclass");
+    print(this);
+  }
+}
+
+class Subclass < Superclass {
+  init() {
+    super.init();
+    print("init subclass");
+  }
+
+  say() {
+    super.say();
+    print("hi, i am subclass");
+  }
+}
+
+Subclass().say();
+
+var before = clock();
+print(fib(40));
+var after = clock();
+print(after-before);
